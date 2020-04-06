@@ -1,11 +1,14 @@
 import urllib.request, json 
 from datetime import datetime
 from engine import engine
-from model import CoronaVirus
+from model import CoronaVirus, Country, Dates
 from sqlalchemy.orm import sessionmaker
 
+
+## Do not use. Not adopted to new model design
+
 Session = sessionmaker(bind=engine)
-session = Session()
+ session = Session()
 
 # get json data about coronavirus in counties
 with urllib.request.urlopen("https://pomber.github.io/covid19/timeseries.json") as url:
