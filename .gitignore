@@ -1,0 +1,14 @@
+# Ignore credentials
+credentials.sh
+
+# Ignore python cache
+__pycache__
+
+
+# Ignore virtual env
+venv
+
+# Ignore vim temp files
+*.swp
+
+
