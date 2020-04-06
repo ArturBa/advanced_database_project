@@ -6,7 +6,7 @@ class CoronaVirus(Base):
     __tablename__ = 'coronavirus'
     id = Column(Integer, primary_key=True)
     date = Column(Date)
-    county = Column(String(128))
+    country = Column(String(128))
     confirmed = Column(Integer)
     deaths = Column(Integer)
     recovered = Column(Integer)

@@ -3,8 +3,12 @@ from sqlalchemy import create_engine
 from base import Base
 from model import CoronaVirus
 
+# get dabase uri
 db_string = os.getenv('DB_URI')
 
+# create database engine
 engine = create_engine(db_string)
-str(Base.metadata.create_all(engine))
+
+if __name__ == "__main__":
+    Base.metadata.create_all(engine)
 
