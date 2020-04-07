@@ -18,8 +18,9 @@ class Countries(Base):
     __tablename__ = 'countries'
     id = Column(Integer, primary_key=True)
     name = Column(String(128))
+    code = Column(String(4))
     corona_virus = relationship("CoronaVirus", backref="country")
-    cities = relationship("City", backref="country")
+    cities = relationship("Cities", backref="country")
 
     def __repl__(self):
         return f"<Country: {self.name}>" 
