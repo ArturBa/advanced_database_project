@@ -13,7 +13,10 @@ session = Session()
 # Get last update date from db
 last_day_db = session.query(Dates).all()
 if last_day_db: 
-    last_day_db = last_day_db[-1].date
+    if last_day_db.corona_virus:
+        last_day_db = last_day_db[-1].date
+    else: 
+        last_day_db = date.fromordinal(1)
 else: 
     last_day_db = date.fromordinal(1)
 
