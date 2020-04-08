@@ -10,7 +10,7 @@ class Dates(Base):
     air_quality = relationship("AirQuality", backref="date")
     corona_virus = relationship("CoronaVirus", backref="date")
 
-    def __repl__(self):
+    def __repr__(self):
         return f"<Date: {self.date}>" 
 
 
@@ -22,7 +22,7 @@ class Countries(Base):
     corona_virus = relationship("CoronaVirus", backref="country")
     cities = relationship("Cities", backref="country")
 
-    def __repl__(self):
+    def __repr__(self):
         return f"<Country: {self.name}>" 
 
 
@@ -33,7 +33,7 @@ class Cities(Base):
     country_id = Column(Integer, ForeignKey('countries.id'))
     name = Column(String(128))
 
-    def __repl__(self):
+    def __repr__(self):
         return f"<City: {self.name}>" 
 
 
@@ -46,7 +46,7 @@ class CoronaVirus(Base):
     deaths = Column(Integer)
     recovered = Column(Integer)
 
-    def __repl__(self):
+    def __repr__(self):
         return f"<Corona: {self.county} {self.date} C: {self.confirmed}"\
                 " D: {self.deaths} R: {self.recovered}>" 
 
@@ -62,6 +62,6 @@ class AirQuality(Base):
     pm25 = Column(Float)
     pm10 = Column(Float)
 
-    def __repl__(self):
+    def __repr__(self):
         return f"<Air Quality:>" 
 
