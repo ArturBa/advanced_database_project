@@ -28,7 +28,7 @@ with urllib.request.urlopen("https://pomber.github.io/covid19/timeseries.json") 
             day_date = datetime.strptime(day['date'], '%Y-%m-%d').date()
 
             # Check the current date with last in db
-            if (first_no_virus_day < day_date):
+            if (first_no_virus_day <= day_date):
                 # If the json date is newer add to db
 
                 day_db = get_or_create(session, Dates, date=day_date)
