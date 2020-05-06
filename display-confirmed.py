@@ -3,16 +3,19 @@ import matplotlib.pyplot as plt
 from engine import engine
 from model import *
 
+
 def display_confirmed(session, country_name):
     try:
-        country = session.query(Countries).filter_by(name=country_name).first()
-        x = []
-        y = []
-        for data in country.corona_virus:
-            x.append(data.date.date)
-            y.append(data.confirmed)
-        plt.plot(x, y)
-        plt.title(f'Confirmed cases in {country_name}')
+        for country in country_name:
+            country_data = session.query(Countries).filter_by(name=country).first()
+            x = []
+            y = []
+            for data in country_data.corona_virus:
+                x.append(data.date.date)
+                y.append(data.confirmed)
+            plt.plot(x, y)
+        plt.legend(country_name)
+        plt.title(f'Confirmed cases')
         plt.xlabel('Date')
         plt.ylabel('Confirmed cases')
         plt.gcf().autofmt_xdate()
@@ -25,6 +28,6 @@ def display_confirmed(session, country_name):
 if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
-    display_confirmed(session, 'Peru')
+    display_confirmed(session, ['Peru', 'Poland'])
     plt.show()
 
