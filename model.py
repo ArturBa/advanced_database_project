@@ -47,8 +47,8 @@ class CoronaVirus(Base):
     recovered = Column(Integer)
 
     def __repr__(self):
-        return f"<Corona: {self.county} {self.date} C: {self.confirmed}"\
-                " D: {self.deaths} R: {self.recovered}>" 
+        return f"<Corona: {self.country} {self.date} C: {self.confirmed}"\
+                f" D: {self.deaths} R: {self.recovered}>"
 
 
 class AirQuality(Base):
