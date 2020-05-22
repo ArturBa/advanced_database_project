@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from engine import engine
 from model import *
 
+
 def display_all_coronadata_singleplot(session, countries):
     try:
         for country in countries:
@@ -26,6 +27,7 @@ def display_all_coronadata_singleplot(session, countries):
 
     except Exception as e:
         print(e)
+
 
 if __name__ == '__main__':
     Session = sessionmaker(bind=engine)

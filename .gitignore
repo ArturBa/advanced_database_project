@@ -7,8 +7,12 @@ __pycache__
 
 # Ignore virtual env
 venv
+.ipynb_checkpoints
 
 # Ignore vim temp files
 *.swp
+
+# Ignore idea files
+.idea
 
 
