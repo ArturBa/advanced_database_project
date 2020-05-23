@@ -3,4 +3,6 @@ psycopg2-binary==2.8
 mysql-connector==2.2.9
 pandas==1.0.3
 matplotlib==3.2.1
+pycountry
+plotly
 
