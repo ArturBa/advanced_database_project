@@ -12,36 +12,38 @@ from .utils import get_or_create
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# Get last update date from db
-dates = session.query(Dates).all()
-print(dates[0])
-dates_virus = list(filter(lambda date: date.corona_virus != [], dates))
-if dates_virus:
-    first_no_virus_day = dates_virus[-1].date + timedelta(days=1)
-else:
-    first_no_virus_day = date.fromordinal(1)
 
-# get json data about coronavirus in counties
-with urllib.request.urlopen("https://pomber.github.io/covid19/timeseries.json") as url:
-    corona_data = json.loads(url.read().decode())
-    for country, country_data in corona_data.items():
-        contry_db = get_or_create(session, Countries, name=country)
+def update_corona_data(session):
+    # Get last update date from db
+    dates = session.query(Dates).all()
+    print(dates[0])
+    dates_virus = list(filter(lambda date: date.corona_virus != [], dates))
+    if dates_virus:
+        first_no_virus_day = dates_virus[-1].date + timedelta(days=1)
+    else:
+        first_no_virus_day = date.fromordinal(1)
 
-        for day in country_data:
-            day_date = datetime.strptime(day['date'], '%Y-%m-%d').date()
+    # get json data about coronavirus in counties
+    with urllib.request.urlopen("https://pomber.github.io/covid19/timeseries.json") as url:
+        corona_data = json.loads(url.read().decode())
+        for country, country_data in corona_data.items():
+            contry_db = get_or_create(session, Countries, name=country)
 
-            # Check the current date with last in db
-            if first_no_virus_day <= day_date:
-                # If the json date is newer add to db
+            for day in country_data:
+                day_date = datetime.strptime(day['date'], '%Y-%m-%d').date()
 
-                day_db = get_or_create(session, Dates, date=day_date)
+                # Check the current date with last in db
+                if first_no_virus_day <= day_date:
+                    # If the json date is newer add to db
 
-                record = CoronaVirus(
-                    country=contry_db,
-                    date=day_db,
-                    confirmed=day['confirmed'],
-                    deaths=day['deaths'],
-                    recovered=day['recovered'])
-                session.add(record)
-        session.commit()
-        print(f'{country} added')
+                    day_db = get_or_create(session, Dates, date=day_date)
+
+                    record = CoronaVirus(
+                        country=contry_db,
+                        date=day_db,
+                        confirmed=day['confirmed'],
+                        deaths=day['deaths'],
+                        recovered=day['recovered'])
+                    session.add(record)
+            session.commit()
+            print(f'{country} added')

@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
-from engine import engine
-from model import *
+from modules.database.engine import engine
 from sqlalchemy.orm import sessionmaker
 
 from modules.database.engine import engine
