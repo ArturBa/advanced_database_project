@@ -1,10 +1,10 @@
 from sqlalchemy.orm import sessionmaker
 import matplotlib.pyplot as plt
-from engine import engine
-from model import *
+from modules.database.engine import engine
+from modules.database.model import *
 import numpy as np
 
-def display_all_coronadata_singleplot(session, countries):
+def display_rate(session, countries):
     try:
         for country in countries:
             x = []

@@ -1,10 +1,10 @@
 from sqlalchemy.orm import sessionmaker
 import matplotlib.pyplot as plt
-from engine import engine
-from model import *
+from modules.database.engine import engine
+from modules.database.model import *
 
 
-def display_all_coronadata_singleplot(session, countries):
+def display_hospitalized(session, countries):
     try:
         for country in countries:
             x = []
