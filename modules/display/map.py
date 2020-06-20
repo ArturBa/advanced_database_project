@@ -5,14 +5,13 @@ import pycountry
 from modules.database.model import *
 
 
-def display_map(session):
+def get_dataframe(session):
     dataframe = pd.read_sql(
         session.query(Countries, CoronaVirus, Dates).filter(Countries.id == CoronaVirus.country_id).filter(
             CoronaVirus.date_id == Dates.id).statement, session.bind)
     del dataframe['id']
     del dataframe['country_id']
     del dataframe['date_id']
-    # del dataframe['code']
     dataframe = dataframe.rename(columns={'name': 'country'})
 
     d_country_code = {}  # To hold the country names and their ISO
@@ -29,8 +28,6 @@ def display_map(session):
             # If could not find country, make ISO code ' '
             d_country_code.update({country: ' '})
 
-    # print(d_country_code) # Uncomment to check dictionary
-
     # create a new column iso_alpha in the df
     # and fill it with appropriate iso 3 code
     for k, v in d_country_code.items():
@@ -38,13 +35,49 @@ def display_map(session):
 
     dataframe.date = pd.to_datetime(dataframe.date)
     dataframe['date'] = dataframe['date'].dt.strftime('%Y-%m-%d')
+    return dataframe
 
-    # print(dataframe.head())  # Uncomment to confirm that ISO codes added
-    # ----------- Step 3 ------------
+
+def display_map_confirmed(session):
+    dataframe = get_dataframe(session)
     fig = px.choropleth(data_frame=dataframe,
                         locations="iso_alpha",
                         color="confirmed",  # value in column 'Confirmed' determines color
                         hover_name="country",
                         color_continuous_scale='deep',  # color scale
                         animation_frame="date")
+    fig.update_layout(
+        title_text='Global confirmed cases of Coronavirus',
+        title_x=0.5
+    )
+    fig.show()
+
+
+def display_map_deaths(session):
+    dataframe = get_dataframe(session)
+    fig = px.choropleth(data_frame=dataframe,
+                        locations="iso_alpha",
+                        color="deaths",  # value in column 'death' determines color
+                        hover_name="country",
+                        color_continuous_scale='deep',  # color scale
+                        animation_frame="date")
+    fig.update_layout(
+        title_text='Global death cases of Coronavirus',
+        title_x=0.5
+    )
+    fig.show()
+
+
+def display_map_recovered(session):
+    dataframe = get_dataframe(session)
+    fig = px.choropleth(data_frame=dataframe,
+                        locations="iso_alpha",
+                        color="recovered",  # value in column 'recovered' determines color
+                        hover_name="country",
+                        color_continuous_scale='deep',  # color scale
+                        animation_frame="date")
+    fig.update_layout(
+        title_text='Global recovered cases of Coronavirus',
+        title_x=0.5
+    )
     fig.show()
