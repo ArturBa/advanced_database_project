@@ -28,5 +28,5 @@ def display_hospitalized(session, countries):
 if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
-    display_all_coronadata_singleplot(session, ['Poland', 'Peru'])
+    display_hospitalized(session, ['Poland', 'Peru'])
     plt.show()

@@ -4,6 +4,7 @@ from modules.database.engine import engine
 from modules.database.model import *
 import numpy as np
 
+
 def display_rate(session, countries):
     try:
         for country in countries:
@@ -29,5 +30,5 @@ def display_rate(session, countries):
 if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
-    display_all_coronadata_singleplot(session, ['Poland', 'Peru'])
+    display_rate(session, ['Poland', 'Peru'])
     plt.show()

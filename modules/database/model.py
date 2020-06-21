@@ -12,7 +12,7 @@ class Dates(Base):
     corona_virus = relationship("CoronaVirus", backref="date")
 
     def __repr__(self):
-        return f"<Date: {self.date}>" 
+        return f"<Date: {self.date}>"
 
 
 class Countries(Base):
@@ -24,7 +24,7 @@ class Countries(Base):
     cities = relationship("Cities", backref="country")
 
     def __repr__(self):
-        return f"<Country: {self.name}>" 
+        return f"<Country: {self.name}>"
 
 
 class Cities(Base):
@@ -35,7 +35,7 @@ class Cities(Base):
     name = Column(String(128))
 
     def __repr__(self):
-        return f"<City: {self.name}>" 
+        return f"<City: {self.name}>"
 
 
 class CoronaVirus(Base):
@@ -48,8 +48,8 @@ class CoronaVirus(Base):
     recovered = Column(Integer)
 
     def __repr__(self):
-        return f"<Corona: {self.country} {self.date} C: {self.confirmed}"\
-                f" D: {self.deaths} R: {self.recovered}>"
+        return f"<Corona: {self.country} {self.date} C: {self.confirmed}" \
+               f" D: {self.deaths} R: {self.recovered}>"
 
 
 class AirQuality(Base):
@@ -64,5 +64,4 @@ class AirQuality(Base):
     pm10 = Column(Float)
 
     def __repr__(self):
-        return f"<Air Quality:>" 
-
+        return f"<Air Quality:>"
