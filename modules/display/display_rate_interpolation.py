@@ -11,7 +11,7 @@ from math import ceil
 def test(x,a,b):
     return a* np.exp(b*x)
 
-def display_rate(session, countries):
+def display_rate_interpolation(session, countries):
     try:
         for country in countries:
             x = []
