@@ -8,7 +8,6 @@ def print_countries_with_recovered_rate(session, rate = 0.5):
     try:
         countries_list = []
         countries = session.query(Countries).all()
-        print("countries = ", countries)
         for country in countries:
             if country != None:
                 if len(country.corona_virus) > 0:
