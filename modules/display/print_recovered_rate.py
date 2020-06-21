@@ -1,8 +1,4 @@
 import sys
-sys.path.append('../..')
-sys.path.append('../database/')
-sys.path.append('../display/')
-sys.path.append('../update/')
 from sqlalchemy.orm import sessionmaker
 import matplotlib.pyplot as plt
 from modules.database.engine import engine
@@ -24,8 +20,3 @@ def print_countries_with_recovered_rate(session, rate = 0.5):
         return countries_list
     except Exception as e:
         print(e)
-        
-if __name__ == '__main__':
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    print("Result = ", print_countries_with_recovered_rate(session))
