@@ -5,7 +5,6 @@ from modules.database.engine import engine
 from modules.database.model import *
 
 
-
 def display_all_coronadata_singleplot(session, countries):
     try:
         for country in countries:
