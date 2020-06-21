@@ -1,9 +1,4 @@
 import sys
-sys.path.append('../..')
-sys.path.append('../database/')
-sys.path.append('../display/')
-sys.path.append('../update/')
-
 from sqlalchemy.orm import sessionmaker
 import matplotlib.pyplot as plt
 from modules.database.engine import engine
@@ -40,10 +35,3 @@ def display_rate(session, countries):
 
     except Exception as e:
         print(e)
-
-
-if __name__ == '__main__':
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    display_rate(session, ['Poland', 'Peru', 'Japan'])
-    plt.show()
